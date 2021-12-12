@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import './Details.css'
 
 function Details() {
@@ -27,6 +28,10 @@ function Details() {
 
             <h3>Description:</h3>
             <p>{selectedMovie.description}</p>
+
+            <Link to="/">
+                <button>Back to List</button>
+            </Link>
         </main>
 
     );
