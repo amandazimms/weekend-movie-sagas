@@ -15,6 +15,7 @@ import axios from 'axios';
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('FETCH_SELECTED_GENRES', fetchSelectedGenres);
+    yield takeEvery('ADD_NEW_MOVIE', addNewMovie);
 }
 
 function* fetchAllMovies() {
@@ -39,10 +40,20 @@ function* fetchSelectedGenres(action) {
 
     } catch {
         console.log('get selected genres error');
-    }
-        
+    }   
 }
 
+function* addNewMovie(action) {
+    console.log('addNewMovie action.payload: ----------->', action.payload);
+    try {
+        const movie = yield axios.post('/api/movie', { title: action.payload.title, poster: action.payload.poster, description: action.payload.description, genre_id: action.payload.genre });
+        console.log('posting movie:', movie.data);
+        yield put({ type: 'FETCH_MOVIES'});
+
+    } catch {
+        console.log('add new movie error');
+    }
+}
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 

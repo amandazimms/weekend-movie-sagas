@@ -8,14 +8,11 @@ function AddMovie() {
     const dispatch = useDispatch();
     const movies = useSelector(store => store.movies);
 
+    //todo - better practice to save all these as properties as a movie object
     const [title, setTitle] = useState('');
     const [url, setURL] = useState('');
     const [description, setDescription] = useState('');
     const [genre, setGenre] = useState('');
-
-    const saveButton = () => {
-        console.log('save');
-    }
 
     const handleTitleChange = (event) => {
         setTitle(event.target.value);
@@ -30,6 +27,16 @@ function AddMovie() {
         setGenre(event.target.value);
     }
 
+    const saveButton = () => {
+        dispatch({ type: 'ADD_NEW_MOVIE', payload: {
+                title: title,
+                poster: url,
+                description: description,
+                genre: genre
+            }
+        });
+    }
+
     return (
         <main>
             <h1>Add New Movie</h1> 
@@ -37,9 +44,9 @@ function AddMovie() {
             <input placeholder='image ULR' type='text' onChange={ (event) => handleURLChange(event) }></input>
             <textarea placeholder='movie description' onChange={ (event) => handleDescriptionChange(event) }></textarea>
             <select name="genre-dropdown" id="genre-dropdown" onChange={ (event) => handleGenreChange(event) }>
-                <option value="Adventure">Adventure</option>
-                <option value="Animated">Animated</option>
-                <option value="Biographical">Biographical</option>
+                <option value={1}>Adventure</option>
+                <option value={2}>Animated</option>
+                <option value={3}>Biographical</option>
             </select>
             <Link to="/">
                 <button onClick={saveButton}>Save</button>
