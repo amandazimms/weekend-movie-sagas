@@ -5,23 +5,27 @@ import './Details.css'
 function Details() {
 
     const dispatch = useDispatch();
-    const movies = useSelector(store => store.movies);
+    const genres = useSelector(store => store.genres);
     const selectedMovie = useSelector(store => store.selectedMovie);
 
-    const genres = ["action", "romance"];
     useEffect(() => {
-       
+        dispatch({ type: 'FETCH_SELECTED_GENRES', payload: selectedMovie.id });
     }, []);
 
     return (
         <main>
             <h1>{selectedMovie.title}</h1>
-            
+
             <img src={selectedMovie.poster} alt={selectedMovie.title}/>
             
             <h3>Genres:</h3>
-            { genres.map(genre => <p>{genre}</p>) }
+            { genres.map(genre => 
+                <div>
+                <p>{genre.name}</p>
+                </div>
+            )}
 
+            <h3>Description:</h3>
             <p>{selectedMovie.description}</p>
         </main>
 
