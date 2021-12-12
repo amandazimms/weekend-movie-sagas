@@ -9,7 +9,7 @@ function AddMovie() {
 
     return (
         <main>
-            
+            <h1>Add New Movie</h1> 
         </main>
 
     );

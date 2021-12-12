@@ -8,6 +8,7 @@ function Details() {
     const movies = useSelector(store => store.movies);
     const selectedMovie = useSelector(store => store.selectedMovie);
 
+    const genres = ["action", "romance"];
     useEffect(() => {
        
     }, []);
@@ -15,7 +16,12 @@ function Details() {
     return (
         <main>
             <h1>{selectedMovie.title}</h1>
+            
             <img src={selectedMovie.poster} alt={selectedMovie.title}/>
+            
+            <h3>Genres:</h3>
+            { genres.map(genre => <p>{genre}</p>) }
+
             <p>{selectedMovie.description}</p>
         </main>
 
